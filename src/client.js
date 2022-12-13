@@ -5,49 +5,43 @@ let eventPool = require('../eventPool');
 
 
 function alertDriver(payload) {
-  setTimeout(() => {
-    console.log(payload);
-    eventPool.emit('PICKUP', payload);
-  }, 1000);
+  console.log(payload);
+  eventPool.emit('PICKUP', payload);
 }
 
 
 function pickUp(payload) {
-  setTimeout(() => {
-    const event = {
-      event: 'Picked up',
-      time: new Date(),
-      payload: payload.payload,
-    };
-    console.log(event);
-    eventPool.emit('IN_TRANSIT', event);
-  }, 1000);
+
+  const event = {
+    event: 'Picked up',
+    time: new Date(),
+    payload: payload.payload,
+  };
+  console.log(event);
+  eventPool.emit('IN_TRANSIT', event);
+
 }
 
 function inTransit(payload) {
-  setTimeout(() => {
+  const event = {
+    event: 'In transit',
+    time: new Date(),
+    payload: payload.payload,
+  };
+  console.log(event);
+  eventPool.emit('DELIVERED', event);
 
-
-    const event = {
-      event: 'In transit',
-      time: new Date(),
-      payload: payload.payload,
-    };
-    console.log(event);
-    eventPool.emit('DELIVERED', event);
-  }, 1000);
 }
 
 function delivered(payload) {
-  setTimeout(() => {
 
-    const event = {
-      event: 'Delivered',
-      time: new Date(),
-      payload: payload.payload,
-    };
-    console.log(event);
-  }, 1000);
+  const event = {
+    event: 'Delivered',
+    time: new Date(),
+    payload: payload.payload,
+  };
+  console.log(event);
+
 }
 
 
