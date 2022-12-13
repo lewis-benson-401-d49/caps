@@ -1,0 +1,25 @@
+{
+  "name": "caps",
+  "version": "1.0.0",
+  "description": "## Project: CAPS",
+  "main": "eventPool.js",
+  "scripts": {
+    "test": "jest --verbose --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tm-LBenson/caps.git"
+  },
+  "keywords": [],
+  "author": "Lewis Benson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tm-LBenson/caps/issues"
+  },
+  "homepage": "https://github.com/tm-LBenson/caps#readme",
+  "dependencies": {
+    "chance": "^1.1.9",
+    "eslint": "^8.29.0",
+    "jest": "^29.3.1"
+  }
+}
