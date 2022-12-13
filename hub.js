@@ -1,15 +1,13 @@
 const eventPool = require('./eventPool');
-const { alertDriver, pickUp, inTransit, delivered } = require('./src/client');
+const { timeoutAlertDriver, timeoutInTransit, timeoutDelivered, timeoutPickUp } = require('./src/function-timeouts');
 const Chance = require('chance');
 
 const chance = new Chance();
 
-
-
-eventPool.on('NEW_PACKAGE', alertDriver);
-eventPool.on('PICKUP', pickUp);
-eventPool.on('IN_TRANSIT', inTransit);
-eventPool.on('DELIVERED', delivered);
+eventPool.on('NEW_PACKAGE', timeoutAlertDriver);
+eventPool.on('PICKUP', timeoutPickUp);
+eventPool.on('IN_TRANSIT', timeoutInTransit);
+eventPool.on('DELIVERED', timeoutDelivered);
 
 setInterval(() => {
   console.log('-------new package arrives---------');
