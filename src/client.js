@@ -15,25 +15,38 @@ function alertDriver(payload) {
 function pickUp(payload) {
   setTimeout(() => {
     const event = {
-      event: 'In transit',
+      event: 'Picked up',
       time: new Date(),
       payload: payload.payload,
     };
-    eventPool.emit('IN_TRANSIT', payload);
+    console.log(event);
+    eventPool.emit('IN_TRANSIT', event);
   }, 1000);
 }
 
 function inTransit(payload) {
   setTimeout(() => {
-    console.log('in-transit');
-    eventPool.emit('DELIVERED', payload);
+
+
+    const event = {
+      event: 'In transit',
+      time: new Date(),
+      payload: payload.payload,
+    };
+    console.log(event);
+    eventPool.emit('DELIVERED', event);
   }, 1000);
 }
 
 function delivered(payload) {
   setTimeout(() => {
-    console.log('delivered');
 
+    const event = {
+      event: 'Delivered',
+      time: new Date(),
+      payload: payload.payload,
+    };
+    console.log(event);
   }, 1000);
 }
 
