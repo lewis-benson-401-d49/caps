@@ -1,10 +1,12 @@
 'use strict';
-const { io } = require('socket.io-client');
-const socket = io('http://localhost:3001/');
+
+let eventPool = require('../eventPool');
+
+
 
 function alertDriver(payload) {
   console.log(payload);
-  socket.emit('PICKUP', payload);
+  eventPool.emit('PICKUP', payload);
 }
 
 
@@ -16,7 +18,7 @@ function pickUp(payload) {
     payload: payload.payload,
   };
   console.log(event);
-  socket.emit('IN_TRANSIT', event);
+  eventPool.emit('IN_TRANSIT', event);
 
 }
 
@@ -27,7 +29,7 @@ function inTransit(payload) {
     payload: payload.payload,
   };
   console.log(event);
-  socket.emit('DELIVERED', event);
+  eventPool.emit('DELIVERED', event);
 
 }
 
