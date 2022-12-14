@@ -14,7 +14,7 @@ function pickUp(payload) {
     time: new Date(),
     payload: payload.payload,
   };
-  console.log(event);
+  console.log('picking up order: ', event.payload.orderID);
   socket.emit('IN_TRANSIT', event);
 
 }
@@ -25,7 +25,7 @@ function inTransit(payload) {
     time: new Date(),
     payload: payload.payload,
   };
-  console.log(event);
+  console.log('order', event.payload.orderID, 'is in transit');
   socket.emit('DELIVERED', event);
 
 }
@@ -38,6 +38,7 @@ function delivered(payload) {
     payload: payload.payload,
   };
   console.log(event);
+  console.log('thank you for delivering order:', event.payload.orderID);
 
 }
 
