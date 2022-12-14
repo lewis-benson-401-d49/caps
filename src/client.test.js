@@ -2,6 +2,12 @@
 const socket = require('../socket');
 
 
+// jest.mock('../socket', () => {
+//   return {
+//     emit: jest.fn(),
+//   },
+// });
+
 socket.emit = jest.fn();
 
 const { pickUp, alertDriver, inTransit, delivered } = require('./client');
