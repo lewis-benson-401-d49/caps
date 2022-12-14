@@ -1,23 +1,26 @@
+const eventPool = require('./eventPool');
 const { timeoutAlertDriver, timeoutInTransit, timeoutDelivered, timeoutPickUp } = require('./src/function-timeouts');
+const Chance = require('chance');
 
-const { Server } = require('socket.io');
-const PORT = process.env.PORT || 3002;
-const server = new Server(PORT);
+const chance = new Chance();
 
+eventPool.on('NEW_PACKAGE', timeoutAlertDriver);
+eventPool.on('PICKUP', timeoutPickUp);
+eventPool.on('IN_TRANSIT', timeoutInTransit);
+eventPool.on('DELIVERED', timeoutDelivered);
 
-const caps = server.of('/caps');
+setInterval(() => {
+  console.log('-------new package arrives---------');
+  const event = {
+    'event': 'Alert Driver',
+    'time': new Date(Date.now()),
+    'payload': {
+      'store': '1-206-flowers',
+      'orderID': chance.guid(),
+      'customer': chance.name(),
+      'address': chance.address(),
+    },
+  };
+  eventPool.emit('NEW_PACKAGE', event);
 
-caps.on('connection', (socket) => {
-  console.log('Socket connected to caps namespace!', socket.id);
-
-  socket.on('NEW_PACKAGE', timeoutAlertDriver);
-  socket.on('PICKUP', timeoutPickUp);
-  socket.on('IN_TRANSIT', timeoutInTransit);
-  socket.on('DELIVERED', timeoutDelivered);
-});
-
-
-
-
-
-
+}, 5000);
