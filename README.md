@@ -21,7 +21,7 @@ As a developer, I want to create an event driven system so that I can write code
 
 ### Links and Resources
 
-- [ci/cd](https://github.com/d49-lab-09/caps/actions) (GitHub Actions)
+- [ci/cd](https://github.com/tm-LBenson/caps/actions) (GitHub Actions)
 - [server-prod]()
 
 ### Setup
