@@ -17,7 +17,7 @@ const newPackage = () => {
     },
   };
 
-  // console.log(event);
+  console.log(event);
   socket.emit('NEW_PACKAGE', event);
 };
 
