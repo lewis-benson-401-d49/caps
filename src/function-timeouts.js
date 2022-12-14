@@ -1,6 +1,7 @@
 'use strict';
 
-let { pickUp, alertDriver, inTransit, delivered } = require('./client');
+let { pickUp, inTransit } = require('./driver');
+let { alertDriver, delivered } = require('./vender');
 
 const timeoutAlertDriver = (payload) => {
   setTimeout(() => {

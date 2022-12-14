@@ -10,9 +10,9 @@ const socket = require('../socket');
 
 socket.emit = jest.fn();
 
-const { pickUp, alertDriver, inTransit, delivered } = require('./client');
+const { pickUp, inTransit } = require('./driver');
 
-
+const { alertDriver, delivered } = require('./vender');
 afterAll(() => {
   socket.close();
 });
