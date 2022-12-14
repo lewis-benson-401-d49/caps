@@ -1,16 +1,17 @@
 'use strict';
 
-const eventPool = require('../eventPool');
+const socket = {
+  on: jest.fn(),
+  emit: function () {
+    return;
+  },
+};
+
+socket.emit = jest.fn();
+
 const { pickUp, alertDriver, inTransit, delivered } = require('./client');
 
 
-
-jest.mock('../eventPool.js', () => {
-  return {
-    on: jest.fn(),
-    emit: jest.fn(),
-  };
-});
 
 
 console.log = jest.fn();
@@ -29,7 +30,7 @@ describe('Handle alertDriver', () => {
   test('emit alert driver to get a pickup', () => {
     alertDriver(event);
     expect(console.log).toHaveBeenCalledWith(event);
-    expect(eventPool.emit).toHaveBeenCalledWith('PICKUP', event);
+    expect(socket.emit).toHaveBeenCalledWith('PICKUP', event);
   });
 });
 
@@ -38,10 +39,8 @@ describe('Handle pickUp', () => {
   test('emit pickup package', () => {
     pickUp(event);
     expect(console.log).toHaveBeenCalled();
-    expect(eventPool.emit).toHaveBeenCalled();
+    expect(socket.emit).toHaveBeenCalled();
   });
-
-
 });
 
 describe('Handle inTransit', () => {
@@ -49,7 +48,7 @@ describe('Handle inTransit', () => {
   test('emit inTransit package', () => {
     inTransit(event);
     expect(console.log).toHaveBeenCalled();
-    expect(eventPool.emit).toHaveBeenCalled();
+    expect(socket.emit).toHaveBeenCalled();
   });
 });
 
@@ -58,6 +57,6 @@ describe('Handle delivered', () => {
   test('emit delivered package', () => {
     delivered(event);
     expect(console.log).toHaveBeenCalled();
-    expect(eventPool.emit).toHaveBeenCalled();
+    expect(socket.emit).toHaveBeenCalled();
   });
 });

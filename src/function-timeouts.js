@@ -17,6 +17,7 @@ const timeoutInTransit = (payload) => {
 const timeoutDelivered = (payload) => {
   setTimeout(() => {
     delivered(payload);
+    process.exit();
   }, 1000);
 };
 
