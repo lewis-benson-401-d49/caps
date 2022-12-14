@@ -4,13 +4,13 @@ const { io } = require('socket.io-client');
 const socket = io('http://localhost:3001/caps');
 const chance = new require('chance')();
 
-const newPackage = () => {
+const newPackage = (vender) => {
   console.log('-------new package arrives---------');
   const event = {
     'event': 'Alert Driver',
     'time': new Date(Date.now()),
     'payload': {
-      'store': '1-206-flowers',
+      'store': vender,
       'orderID': chance.guid(),
       'customer': chance.name(),
       'address': chance.address(),
@@ -22,5 +22,6 @@ const newPackage = () => {
 };
 
 setInterval(() => {
-  newPackage();
+  newPackage('1-206-flowers');
+  newPackage('1-800-cake');
 }, 5000);

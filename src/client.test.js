@@ -12,7 +12,7 @@ socket.emit = jest.fn();
 
 const { pickUp, inTransit } = require('./driver');
 
-const { alertDriver, delivered } = require('./vender');
+const { alertDriver, delivered } = require('./flowerVender');
 afterAll(() => {
   socket.close();
 });
