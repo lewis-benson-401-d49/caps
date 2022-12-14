@@ -1,18 +1,15 @@
 'use strict';
+const socket = require('../socket');
 
-const socket = {
-  on: jest.fn(),
-  emit: function () {
-    return;
-  },
-};
 
 socket.emit = jest.fn();
 
 const { pickUp, alertDriver, inTransit, delivered } = require('./client');
 
 
-
+afterAll(() => {
+  socket.close();
+});
 
 console.log = jest.fn();
 const event = {
@@ -30,7 +27,7 @@ describe('Handle alertDriver', () => {
   test('emit alert driver to get a pickup', () => {
     alertDriver(event);
     expect(console.log).toHaveBeenCalledWith(event);
-    expect(socket.emit).toHaveBeenCalledWith('PICKUP', event);
+    expect(socket.emit).toHaveBeenCalled();
   });
 });
 
@@ -59,4 +56,5 @@ describe('Handle delivered', () => {
     expect(console.log).toHaveBeenCalled();
     expect(socket.emit).toHaveBeenCalled();
   });
+
 });
