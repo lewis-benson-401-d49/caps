@@ -6,22 +6,17 @@
 
 ### Problem Domain
 
-Today, we begin the first of a 4-Phase build of the CAPS system, written in Node.js. In this first phase, our goal is to setup a pool of events and handler functions, with the intent being to refactor parts of the system throughout the week, but keep the handlers themselves largely the same. The task of “delivering a package” doesn’t change (the handler), even if the mechanism for triggering that task (the event) does.
-The following user/developer stories detail the major functionality for this phase of the project.
+The core functionality we’ve already built remains the same. The difference in this phase is that we’ll be creating a networking layer. As such, the user stories that speak to application functionality remain unchanged, but our developer story changes to reflect the work needed for refactoring.
 
 As a vendor, I want to alert the system when I have a package to be picked up.
 As a driver, I want to be notified when there is a package to be delivered.
 As a driver, I want to alert the system when I have picked up a package and it is in transit.
 As a driver, I want to alert the system when a package has been delivered.
 As a vendor, I want to be notified when my package has been delivered.
-And as developers, here are some of the development stories that are relevant to the above.
-
-As a developer, I want to use industry standards for managing the state of each package.
-As a developer, I want to create an event driven system so that I can write code that happens in response to events, in real time.
 
 ### Links and Resources
 
-- [ci/cd](https://github.com/d49-lab-09/caps/actions) (GitHub Actions)
+- [ci/cd](https://github.com/tm-LBenson/caps/actions) (GitHub Actions)
 - [server-prod]()
 
 ### Setup
@@ -49,4 +44,4 @@ see `.env.sample`
 
 #### UML
 
-![UML](./assets/uml.png)
+![UML](./assets/uml2.png)
