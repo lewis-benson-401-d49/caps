@@ -2,7 +2,7 @@
   "name": "caps",
   "version": "1.0.0",
   "description": "## Project: CAPS",
-  "main": "eventPool.js",
+  "main": "hub.js",
   "scripts": {
     "test": "jest --verbose --coverage --detectOpenHandles"
   },
@@ -19,7 +19,6 @@
   "homepage": "https://github.com/tm-LBenson/caps#readme",
   "dependencies": {
     "chance": "^1.1.9",
-    "dotenv": "^16.0.3",
     "eslint": "^8.29.0",
     "jest": "^29.3.1",
     "socket.io": "^4.5.4",

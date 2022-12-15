@@ -1,20 +1,15 @@
 const { Server } = require('socket.io');
-const PORT = 3001;
 const Queue = require('./lib/Queue');
-
+const logger = require('./lib/logger');
 const newPackageQueue = new Queue();
 const deliveryQueue = new Queue();
+const server = new Server(3001);
 
-const server = new Server(PORT);
 
-const caps = server.of('/caps');
 
-function logger(event, payload) {
-  const time = new Date();
-  console.log('EVENT:', { event, time, payload });
-}
-caps.on('connection', (socket) => {
-  console.log('Socket connected to /caps namespace', socket.id);
+
+server.on('connection', (socket) => {
+  console.log('Socket connected:', socket.id);
 
   socket.on('JOIN', (vendorId) => {
     socket.join(vendorId);
