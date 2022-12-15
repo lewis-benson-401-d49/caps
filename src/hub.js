@@ -2,10 +2,8 @@ const { Server } = require('socket.io');
 const Queue = require('./lib/Queue');
 const logger = require('./lib/logger');
 const newPackageQueue = new Queue();
-const deliveryQueue = new Queue();
+
 const server = new Server(3001);
-
-
 
 
 server.on('connection', (socket) => {
@@ -29,18 +27,19 @@ server.on('connection', (socket) => {
   });
 
   socket.on('IN-TRANS', (payload) => {
+    console.log('In Transits:', payload.orderId);
     logger('IN-TRANS', payload);
     socket.broadcast.emit('IN-TRANS', payload);
   });
 
   socket.on('DELIVERED', (payload) => {
-    let currentQueue = deliveryQueue.read(payload.vendorId);
+    let currentQueue = newPackageQueue.read(payload.vendorId);
     if (!currentQueue) {
-      let vendorKey = deliveryQueue.store(payload.vendorId, new Queue());
-      currentQueue = deliveryQueue.read(vendorKey);
+      let vendorKey = newPackageQueue.store(payload.vendorId, new Queue());
+      currentQueue = newPackageQueue.read(vendorKey);
     }
     currentQueue.store(payload.orderId, payload);
-    console.log('in DELIVERED:', currentQueue);
+    console.log('Delivered:', currentQueue);
     logger('DELIVERED', payload);
     socket.broadcast.emit('DELIVERED', payload);
   });
@@ -55,9 +54,7 @@ server.on('connection', (socket) => {
   });
 
   socket.on('DELIVER', (payload) => {
-    let currentQueue = deliveryQueue.read(payload.vendorId);
-
-
+    let currentQueue = newPackageQueue.read(payload.vendorId);
     if (currentQueue && currentQueue.data) {
       Object.keys(currentQueue.data).forEach(orderId => {
         socket.emit('DELIVERED', currentQueue.read(orderId));

@@ -15,4 +15,4 @@ socket.on('DELIVERED', thankDriver);
 setInterval(() => {
   console.log('-------new package arrives at flowers---------');
   requestPickup();
-}, 1000);
+}, 3000);
