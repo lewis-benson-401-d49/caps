@@ -11,7 +11,6 @@ class Queue {
   }
 
   read(key) {
-    console.log(this.data[key], 'queue file');
     return this.data[key];
   }
 

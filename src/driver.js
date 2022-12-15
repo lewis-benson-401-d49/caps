@@ -10,9 +10,9 @@ const pickUp = (socket) => (payload) => {
     payload: payload.payload,
   };
 
-  packageQueue = new Queue(payload.currentQueue.data);
+  packageQueue = new Queue(payload.passingForward);
   const { queueId } = payload.event.payload;
-  
+ 
   let currentQueue = packageQueue.read(queueId);
   console.log(currentQueue);
   if (!currentQueue) {

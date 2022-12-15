@@ -21,11 +21,12 @@ const newPackage = (vender) => {
   };
   let currentQueue = packageQueue.read(event.payload.queueId);
   if (!currentQueue) {
-    let queueKey = packageQueue.store(event.payload.queueId, new Queue());
-    currentQueue = packageQueue.read(queueKey);
+    packageQueue.store(event.payload.queueId, new Queue);
+    currentQueue = packageQueue.read(event.payload.queueId);
+
   }
   currentQueue.store(event.payload.orderID, event);
-
-  socket.emit('NEW_PACKAGE', { event, currentQueue });
+  const passingForward = currentQueue.data;
+  socket.emit('NEW_PACKAGE', { event, passingForward });
 };
 module.exports = newPackage;
