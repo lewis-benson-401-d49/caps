@@ -41,8 +41,9 @@ see `.env.sample`
 
 Using 4 terminals run:
 
-- nodemon src/client.js
+- nodemon src/cakeVenders.js
 - nodemon hub.js
+- nodemon src/flowerVenders.js
 
 #### Features / Routes
 
