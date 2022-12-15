@@ -1,28 +1,38 @@
 'use strict';
-const socket = require('../socket');
-
-
-function pickUp(payload) {
+const { packageQueue } = require('./lib/Queue');
+const pickUp = (socket) => (payload) => {
 
   const event = {
     event: 'Picked up',
     time: new Date(),
     payload: payload.payload,
   };
+  console.log(packageQueue);
+  let currentQueue = packageQueue.read(payload.payload.queueId);
+  console.log(currentQueue, 'payload');
+  if (!currentQueue) {
+    throw new Error('New package, but queue is null');
+  }
+  let packageFromQueue = currentQueue.remove(payload.orderID);
   console.log('picking up order: ', event.payload.orderID);
-  socket.emit('IN_TRANSIT', event);
 
-}
+  socket.to(payload.queueId).emit('IN_TRANSIT', packageFromQueue);
+};
 
-function inTransit(payload) {
+const inTransit = (socket) => (payload) => {
   const event = {
     event: 'In transit',
     time: new Date(),
     payload: payload.payload,
   };
-  console.log('order', event.payload.orderID, 'is in transit');
-  socket.emit('DELIVERED', event);
+  let currentQueue = packageQueue.read(payload.queueId);
+  if (currentQueue && currentQueue.data) {
+    Object.keys(currentQueue.data).forEach(orderId => {
 
-}
+      socket.emit('DELIVERED', currentQueue.read(orderId));
+    });
+  }
+  console.log('order', event.payload.orderID, 'is in transit');
+};
 
 module.exports = { pickUp, inTransit };
