@@ -30,7 +30,11 @@ see `.env.sample`
 
 #### How to initialize/run your application (where applicable)
 
-- nodemon
+- `node newpackage.js`
+  - this starts generating packages
+- `node src/client.js`
+  - this will fire off the listeners for the sockets and begin the delivery cycle
+  - both vender and driver are in the clients file
 
 #### Features / Routes
 
