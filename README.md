@@ -42,7 +42,7 @@ see `.env.sample`
 Using 4 terminals run:
 
 - nodemon src/cakeVenders.js
-- nodemon hub.js
+- nodemon hub.js (driver listens in hub.js too)
 - nodemon src/flowerVenders.js
 
 #### Features / Routes
