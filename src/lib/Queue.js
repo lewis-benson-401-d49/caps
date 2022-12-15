@@ -22,6 +22,4 @@ class Queue {
   }
 }
 
-const packageQueue = new Queue();
-
-module.exports = { packageQueue, Queue };
+module.exports = Queue;

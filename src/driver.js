@@ -10,16 +10,16 @@ const pickUp = (socket) => (payload) => {
     time: new Date(),
     payload: payload.payload,
   };
-  // console.log(packageQueue);
-  // let currentQueue = packageQueue.read(payload.payload.queueId);
+  console.log(packageQueue, 'queue');
+  let currentQueue = packageQueue.read(payload.payload.queueId);
 
-  // if (!currentQueue) {
-  // throw new Error('New package, but queue is null');
-  // }
-  // let packageFromQueue = currentQueue.remove(payload.orderID);
+  if (!currentQueue) {
+    throw new Error('New package, but queue is null');
+  }
+  let packageFromQueue = currentQueue.remove(payload.orderID);
   console.log('picking up order: ', event.payload.orderID);
 
-  // socket.to(payload.queueId).emit('IN_TRANSIT', packageFromQueue);
+  socket.to(payload.queueId).emit('IN_TRANSIT', packageFromQueue);
 };
 
 const inTransit = (socket) => (payload) => {
@@ -28,14 +28,14 @@ const inTransit = (socket) => (payload) => {
     time: new Date(),
     payload: payload.payload,
   };
-  // let currentQueue = packageQueue.read(payload.queueId);
-  // if (currentQueue && currentQueue.data) {
-  // Object.keys(currentQueue.data).forEach(orderId => {
-  // const data = currentQueue.read(orderId)
-  socket.emit('DELIVERED', 'this would be DATA');
-  // });
+  let currentQueue = packageQueue.read(payload.queueId);
+  if (currentQueue && currentQueue.data) {
+    Object.keys(currentQueue.data).forEach(orderId => {
+      const data = currentQueue.read(orderId);
+      socket.emit('DELIVERED', data);
+    });
 
-  // }
+  }
   console.log('order', event.payload.orderID, 'is in transit');
 };
 
