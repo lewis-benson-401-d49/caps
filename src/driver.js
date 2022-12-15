@@ -1,7 +1,7 @@
 'use strict';
 const { packageQueue } = require('./lib/Queue');
 const pickUp = (socket) => (payload) => {
-
+  socket.emit('JOIN', 'flowers');
   const event = {
     event: 'Picked up',
     time: new Date(),

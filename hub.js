@@ -12,7 +12,7 @@ server.on('connection', (socket) => {
 
   });
 
-  // socket.onAny((event, payload) => console.log({ event, payload }));
+
 
   socket.on('JOIN', (queueId) => {
     socket.join(queueId);

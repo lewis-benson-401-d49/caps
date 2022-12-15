@@ -1,19 +1,6 @@
 'use strict';
 
-const alertDriver = (socket) => (payload) => {
-  socket.emit('PICKUP', payload);
-};
 
-function delivered(payload) {
-
-  const event = {
-    event: 'Delivered',
-    time: new Date(),
-    payload: payload.payload,
-  };
-
-  console.log('thank you for delivering order:', event.payload.orderID);
-}
 const { packageQueue, Queue } = require('./src/lib/Queue');
 const socket = require('./socket');
 const chance = new require('chance')();
@@ -40,9 +27,4 @@ const newPackage = (vender) => {
 
   socket.emit('NEW_PACKAGE', event);
 };
-
-
-module.exports = { alertDriver, delivered, newPackage };
-
-
-
+module.exports = newPackage;
