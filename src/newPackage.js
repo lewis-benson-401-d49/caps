@@ -1,8 +1,8 @@
 'use strict';
 
 
-const { packageQueue, Queue } = require('./src/lib/Queue');
-const socket = require('./socket');
+const { packageQueue, Queue } = require('./lib/Queue');
+const socket = require('../socket');
 const chance = new require('chance')();
 
 const newPackage = (vender) => {

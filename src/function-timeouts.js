@@ -1,7 +1,23 @@
 'use strict';
 const socket = require('../socket');
 let { pickUp, inTransit } = require('./driver');
-let { alertDriver, delivered } = require('./venders');
+
+const alertDriver = (socket) => (payload) => {
+  socket.emit('PICKUP', payload);
+};
+
+function delivered(payload) {
+
+  const event = {
+    event: 'Delivered',
+    time: new Date(),
+    payload: payload.payload,
+  };
+
+  console.log('thank you for delivering order:', event.payload.orderID);
+}
+
+
 
 const timeoutAlertDriver = (payload) => {
   setTimeout(() => {
@@ -32,5 +48,4 @@ const timeoutPickUp = (payload) => {
   }, 1000);
 
 };
-
-module.exports = { timeoutAlertDriver, timeoutInTransit, timeoutDelivered, timeoutPickUp };
+module.exports = { timeoutAlertDriver, timeoutInTransit, timeoutDelivered, timeoutPickUp, alertDriver, delivered };
