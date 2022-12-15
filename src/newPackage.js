@@ -21,18 +21,19 @@ const newPackage = (vender) => {
   };
 
   let currentQueue = packageQueue.read(event.payload.queueId);
+
   if (!currentQueue) {
     packageQueue.store(event.payload.queueId, new Queue);
     currentQueue = packageQueue.read(event.payload.queueId);
   }
-  currentQueue.store(event.payload.orderID, event);
+  currentQueue.store(event.payload.queueId, event);
+  console.log(currentQueue);
 
   socket.emit('NEW_PACKAGE', event);
 };
 
 
 const pickUp = (socket) => (payload) => {
-
   socket.emit('JOIN', 'flowers');
   const event = {
     event: 'Picked up',
@@ -40,9 +41,8 @@ const pickUp = (socket) => (payload) => {
     payload: payload.payload,
   };
 
-
   const { queueId } = payload.payload;
-  console.log(packageQueue);
+  console.log(packageQueue, 'main');
   let currentQueue = packageQueue.read(queueId);
   console.log(currentQueue);
   if (!currentQueue) {

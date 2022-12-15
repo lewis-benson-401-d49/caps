@@ -1,7 +1,7 @@
 
 
 const socket = require('../socket');
-const { newPackage } = require('./newPackage');
+const newPackage = require('./newPackage');
 socket.emit('JOIN', 'cake');
 
 

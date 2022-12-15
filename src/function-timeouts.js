@@ -1,6 +1,6 @@
 'use strict';
 const socket = require('../socket');
-let { pickUp, inTransit } = require('./newPackage');
+let { pickUp, inTransit } = require('../hub');
 
 const alertDriver = (socket) => (payload) => {
   socket.emit('PICKUP', payload);
