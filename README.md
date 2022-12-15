@@ -31,11 +31,10 @@ As a developer, I want to create a system for allowing subscribers to retrieve a
 ### Setup
 
 `npm i` to install dependencies
-`nodemon` to start server on port 3001
 
 #### `.env` requirements
 
-see `.env.sample`
+there are no env requirements, the port is hardcoded to 3001 in hub.js
 
 #### How to initialize/run your application (where applicable)
 
@@ -48,7 +47,13 @@ Using 4 terminals run:
 
 #### Features / Routes
 
-- Feature one: Deploy to Prod
+- Feature one:
+  Creates a package in cake store
+  Creates package in flowers store
+  adds package to pickup queue
+  moves package to delivery queue
+  delivers package
+  thanks driver
 
 #### Tests
 
