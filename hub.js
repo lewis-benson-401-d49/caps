@@ -1,4 +1,4 @@
-const { timeoutAlertDriver, timeoutInTransit, timeoutDelivered, timeoutPickUp } = require('./src/function-timeouts');
+const { timeoutInTransit, timeoutDelivered, timeoutPickUp } = require('./src/function-timeouts');
 
 const { Server } = require('socket.io');
 const PORT = 3001;
@@ -27,6 +27,7 @@ server.on('connection', (socket) => {
     }, 1000);
   };
   socket.on('NEW_PACKAGE', timeoutAlertDriver);
+  
   socket.on('PICKUP', timeoutPickUp);
   socket.on('IN_TRANSIT', timeoutInTransit);
   socket.on('DELIVERED', timeoutDelivered);
