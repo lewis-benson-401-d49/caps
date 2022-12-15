@@ -10,7 +10,7 @@ jest.mock('../socket', () => {
 
 // socket.emit = jest.fn();
 
-const { pickUp, inTransit } = require('./driver');
+// const { pickUp, inTransit } = require('./driver');
 
 
 // afterAll(() => {
