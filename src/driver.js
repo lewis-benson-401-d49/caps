@@ -1,21 +1,24 @@
 'use strict';
-const { packageQueue } = require('./lib/Queue');
-
-
-
+const { Queue } = require('./lib/Queue');
+let packageQueue;
 const pickUp = (socket) => (payload) => {
+
   socket.emit('JOIN', 'flowers');
   const event = {
     event: 'Picked up',
     time: new Date(),
     payload: payload.payload,
   };
-  console.log(packageQueue, 'queue');
-  let currentQueue = packageQueue.read(payload.payload.queueId);
 
+  packageQueue = new Queue(payload.currentQueue.data);
+  const { queueId } = payload.event.payload;
+  
+  let currentQueue = packageQueue.read(queueId);
+  console.log(currentQueue);
   if (!currentQueue) {
     throw new Error('New package, but queue is null');
   }
+  console.log(currentQueue);
   let packageFromQueue = currentQueue.remove(payload.orderID);
   console.log('picking up order: ', event.payload.orderID);
 

@@ -1,7 +1,7 @@
 'use strict';
 
 
-const Queue = require('./lib/Queue');
+const { Queue } = require('./lib/Queue');
 const packageQueue = new Queue();
 const socket = require('../socket');
 const chance = new require('chance')();
@@ -25,6 +25,7 @@ const newPackage = (vender) => {
     currentQueue = packageQueue.read(queueKey);
   }
   currentQueue.store(event.payload.orderID, event);
-  socket.emit('NEW_PACKAGE', event);
+
+  socket.emit('NEW_PACKAGE', { event, currentQueue });
 };
 module.exports = newPackage;

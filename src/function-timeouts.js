@@ -17,8 +17,6 @@ function delivered(payload) {
   console.log('thank you for delivering order:', event.payload.orderID);
 }
 
-
-
 const timeoutAlertDriver = (payload) => {
   setTimeout(() => {
 

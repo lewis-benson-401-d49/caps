@@ -1,8 +1,8 @@
 'use strict';
 
 class Queue {
-  constructor() {
-    this.data = {};
+  constructor(existingQueue = {}) {
+    this.data = existingQueue;
   }
 
   store(key, value) {
@@ -11,6 +11,7 @@ class Queue {
   }
 
   read(key) {
+    console.log(this.data[key], 'queue file');
     return this.data[key];
   }
 
@@ -22,4 +23,6 @@ class Queue {
   }
 }
 
-module.exports = Queue;
+const packageQueue = new Queue();
+
+module.exports = { packageQueue, Queue };
