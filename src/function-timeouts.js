@@ -1,10 +1,8 @@
 'use strict';
 const socket = require('../socket');
-let { pickUp, inTransit } = require('../hub');
+let { pickUp, inTransit } = require('./newPackage');
 
-const alertDriver = (socket) => (payload) => {
-  socket.emit('PICKUP', payload);
-};
+
 
 function delivered(payload) {
 
@@ -17,12 +15,7 @@ function delivered(payload) {
   console.log('thank you for delivering order:', event.payload.orderID);
 }
 
-const timeoutAlertDriver = (payload) => {
-  setTimeout(() => {
 
-    alertDriver(socket)(payload);
-  }, 1000);
-};
 
 const timeoutInTransit = (payload) => {
   setTimeout(() => {
@@ -46,4 +39,4 @@ const timeoutPickUp = (payload) => {
   }, 1000);
 
 };
-module.exports = { timeoutAlertDriver, timeoutInTransit, timeoutDelivered, timeoutPickUp, alertDriver, delivered };
+module.exports = {  timeoutInTransit, timeoutDelivered, timeoutPickUp,  delivered };

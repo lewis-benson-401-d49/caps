@@ -20,10 +20,19 @@ server.on('connection', (socket) => {
     socket.emit('JOIN', queueId);
   });
   console.log('Socket connected to event server!', socket.id);
+  const timeoutAlertDriver = (payload) => {
+    setTimeout(() => {
 
+      alertDriver(socket)(payload);
+    }, 1000);
+  };
   socket.on('NEW_PACKAGE', timeoutAlertDriver);
   socket.on('PICKUP', timeoutPickUp);
   socket.on('IN_TRANSIT', timeoutInTransit);
   socket.on('DELIVERED', timeoutDelivered);
 });
+
+const alertDriver = (socket) => (payload) => {
+  socket.emit('PICKUP', payload);
+};
 
